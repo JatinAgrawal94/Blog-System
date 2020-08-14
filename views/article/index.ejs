@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <title>Blog</title>
+</head>
+<body>
+       <div class="container">
+           <h1 class="mb-4">Blog Articles</h1>
+           <a href="/article/new" class="btn btn-success" style="margin-bottom:15px;">New Article</a>
+
+           <% article.forEach(article=>{ %>
+                <div class="card mt-4" style="border:1px solid #D0D0D0;padding:10px 10px;border-radius:1%;">
+                    <div class="card-body">
+                        <h4 class="card-title"><%= article.title %></h4>
+                        <div class="card-subtitle text-muted mb-2">
+                            <%=  article.createdAt.toLocaleDateString() %>
+                        </div>
+                        <div class="card-text mb-2">
+                            <%= article.description %>
+                        </div>
+                        <a href="/article/<%= article.slug%>" class="btn btn-primary" style="display: inline;padding:8.5px 5px;">Read More</a>
+                        <a href="/article/edit/<%=article.id%>" class="btn btn-info" style="display: inline;padding-top:8.5px;padding-bottom: 8.5px;">Edit</a>
+                        <form action="/article/<%= article.id %>?_method=DELETE" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                    
+                </div>
+           <%})%>
+       </div>
+</body>
+</html>
